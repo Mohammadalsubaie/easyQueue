@@ -1,0 +1,109 @@
+.auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-placeholder {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 2px dashed #ccc;
+    color: #6b7280;
+    font-size: 1rem;
+  }
+  
+  .form-group {
+    margin: 1rem 0;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .hint {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .error-message {
+    color: #ef4444;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .auth-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  .auth-button.loading {
+    position: relative;
+  }
+  
+  .auth-button .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 0.5rem;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .success-message {
+    text-align: center;
+  }
+  
+  .success-message h2 {
+    margin-bottom: 1rem;
+    color: #10b981;
+  }
+  
+  .success-message p {
+    margin-bottom: 1.5rem;
+    color: #374151;
+  }
+  .queue-id {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .queue-id-note {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+  }

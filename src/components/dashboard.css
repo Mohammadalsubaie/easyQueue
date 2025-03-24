@@ -1,0 +1,389 @@
+/* General Styles */
+.edit-button {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: white;
+  padding: 0.25rem 0.5rem; /* Further decreased size */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background: linear-gradient(135deg, #388e3c, #4caf50);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button .icon {
+  font-size: 1rem;
+}
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #111827;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 20px;
+}
+
+.sidebar-header .menu-toggle {
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 15px 20px;
+}
+
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+  background: #1f2937;
+  border-radius: 5px;
+}
+
+.sidebar-menu li a svg {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.sidebar.collapsed .sidebar-menu li a span {
+  display: none;
+}
+
+.profile-section {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #374151;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-name {
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+.dashboard-container {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-controls .qr-toggle {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .qr-section, .queue-management {
+    padding: 1rem;
+  }
+
+  .qr-section h2, .queue-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .qr-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .print-btn, .copy-link-btn, .action-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .queue-table th, .queue-table td {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #2a4365;
+  font-weight: bold;
+}
+
+.header-controls .qr-toggle {
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-controls .qr-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* QR Code Section */
+.qr-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  animation: slideIn 0.8s ease-in-out;
+}
+
+.qr-section h2 {
+  font-size: 1.5rem;
+  color: #2a4365;
+  margin-bottom: 1rem;
+}
+
+.qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.print-btn,
+.copy-link-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.print-btn {
+  background: #007bff;
+  color: white;
+}
+
+.print-btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.copy-link-btn {
+  background: #28a745;
+  color: white;
+}
+
+.copy-link-btn:hover {
+  background: #1e7e34;
+  transform: scale(1.05);
+}
+
+/* Queue Management */
+.queue-management {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.8s ease-in-out;
+}
+
+.queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.queue-header h3 {
+  font-size: 1.5rem;
+  color: #2a4365;
+}
+
+.queue-stats span {
+  margin-right: 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.queue-table th {
+  font-size: 1rem;
+  color: #374151;
+  background: linear-gradient(135deg, #e5e7eb, #f9fafb);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.queue-table td {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status.waiting {
+  color: #d97706;
+}
+
+.status.waiting:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status.seated {
+  background: #bbf7d0;
+  color: #10b981;
+}
+
+.status.seated:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status.removed {
+  background: #fecaca;
+  color: #dc2626;
+}
+
+.status.removed:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 50px; /* Changed shape to pill */
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 0.5rem; /* Added space between buttons */
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-btn.seat {
+  background: #007bff;
+  color: white;
+  order: 1;
+}
+
+.action-btn.seat:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.remove {
+  background: #ef4444;
+  color: white;
+  order: 2;
+}
+
+.action-btn.remove:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.message {
+  background: #128c7e; /* WhatsApp green */
+  color: white;
+  order: 3;
+}
+
+.action-btn.message:hover {
+  background: #075e54; /* Darker WhatsApp green */
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
