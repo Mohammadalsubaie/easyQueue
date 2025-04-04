@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { getFirestore, collection, query, where, onSnapshot, doc, getDoc, updateDoc, serverTimestamp, addDoc } from "firebase/firestore";
+import { getFirestore, collection, query, where, onSnapshot, doc, getDoc, updateDoc, serverTimestamp, addDoc, deleteDoc } from "firebase/firestore";
 import { auth, functions } from "../firebase";
 import "./dashboard.css";
 import RestaurantSetup from "./RestaurantSetup";
@@ -82,7 +82,7 @@ const Dashboard = () => {
     return new Date(diff).toISOString().substr(11, 8);
   };
 
-  const handleStatusChange = async (queueId, newStatus) => {
+  const handleStatusChange = async (queueId, newStatus, phone) => {
     if (!window.confirm(`Mark this customer as ${newStatus}?`)) return;
 
     try {
@@ -99,7 +99,7 @@ const Dashboard = () => {
 
       setHistory((prevHistory) => [
         ...prevHistory,
-        { action: newStatus, queueId, timestamp: new Date().toISOString() },
+        { action: newStatus, queueId, phone, timestamp: new Date().toISOString() },
       ]);
 
       const db = getFirestore();
@@ -108,6 +108,7 @@ const Dashboard = () => {
         restaurantId: restaurantId,
         history: serverTimestamp(),
         action: newStatus,
+        phone: phone,
         timestamp: new Date().toISOString(),
       });
       await updateDoc(doc(db, 'history', his.id), {
@@ -139,6 +140,19 @@ const Dashboard = () => {
     } catch (error) {
       console.error("Error sending WhatsApp message:", error);
       alert("Failed to send message. Please try again.");
+    }
+  };
+
+  const deleteHistoryEntry = async (historyId) => {
+    if (!window.confirm("Are you sure you want to delete this history entry?")) return;
+    
+    try {
+      const db = getFirestore();
+      await deleteDoc(doc(db, "history", historyId));
+      setHistory(prevHistory => prevHistory.filter(entry => entry.id !== historyId && entry.hisId !== historyId));
+    } catch (error) {
+      console.error("Error deleting history entry:", error);
+      alert("Delete failed. Please try again.");
     }
   };
 
@@ -210,7 +224,7 @@ const Dashboard = () => {
               {restaurantId ? (
                 <>
                   <QRCodeSVG
-                    value={`${window.location.origin}/join/${restaurantId}`}
+                    value={`${window.location.origin}/join-queue/${restaurantId}`}
                     size={200}
                     bgColor="#ffffff"
                     fgColor="#2a4365"
@@ -261,30 +275,32 @@ const Dashboard = () => {
               {queue.map((customer, index) => (
                 <tr key={customer.id} className="queue-item">
                   <td>{index + 1}</td>
-                  <td>{customer.phoneNumber}</td>
+                  <td>{customer.phone}</td>
                   <td>{customer.seats}</td>
                   <td>{customer.waitingTime}</td>
-                  <td className={`status ${customer.status.toLowerCase()}`}>
-                    {customer.status}
+                  <td>
+                    <span className={`status ${customer.status.toLowerCase()}`}>
+                      {customer.status}
+                    </span>
                   </td>
                   <td className="actions">
                     <button
                       className="action-btn seat"
-                      onClick={() => handleStatusChange(customer.id, "Seated")}
+                      onClick={() => handleStatusChange(customer.id, "Seated", customer.phone)}
                     >
                       ✓ Seat
                     </button>
                     <button
                       className="action-btn remove"
-                      onClick={() => handleStatusChange(customer.id, "Removed")}
+                      onClick={() => handleStatusChange(customer.id, "Removed", customer.phone)}
                     >
                       ✕ Remove
                     </button>
                     <button
                       className="action-btn message"
-                      onClick={() => sendWhatsAppMessage(customer.phoneNumber)}
+                      onClick={() => sendWhatsAppMessage(customer.phone)}
                     >
-                      📩 Send Message
+                      📩 Message
                     </button>
                   </td>
                 </tr>
@@ -305,6 +321,7 @@ const Dashboard = () => {
                 <th>Timestamp</th>
                 <th>Action</th>
                 <th>Details</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -312,7 +329,16 @@ const Dashboard = () => {
                 <tr key={index} className="queue-item">
                   <td>{entry.timestamp}</td>
                   <td>{entry.action}</td>
-                  <td>{entry.queueId ? `Queue ID: ${entry.queueId}` : `Phone: ${entry.phoneNumber}`}</td>
+                  <td>{entry.phone ? `Phone: ${entry.phone}` : (entry.queueId ? `Queue ID: ${entry.queueId}` : 'N/A')}</td>
+                  <td>
+                    <button
+                      className="action-btn remove"
+                      onClick={() => deleteHistoryEntry(entry.id || entry.hisId)}
+                      title="Delete history entry"
+                    >
+                      🗑️ Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -321,6 +347,6 @@ const Dashboard = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;

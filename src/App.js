@@ -31,7 +31,7 @@ import Register from "./components/Register";
 import ForgotPassword from "./components/ForgotPassword";
 import Dashboard from "./components/dashboard"; // Check casing
 import JoinQueue from "./components/JoinQueue"; // Verify file extension
-import TrackQueue from "./components/TrackQueue"; // Verify file extension
+// import TrackQueue from "./components/TrackQueue"; // Verify file extension
 import RestaurantSetup from "./components/RestaurantSetup";
 import "./App.css";
 
@@ -44,7 +44,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/join-queue/:restaurantId" element={<JoinQueue />} />
-        <Route path="/track/:queueId" element={<TrackQueue />} />
+        {/* <Route path="/track/:queueId" element={<TrackQueue />} /> */}
         <Route path="/setup" element={<RestaurantSetup />} />
         <Route path="*" element={<h1>Not Found</h1>} />
         
